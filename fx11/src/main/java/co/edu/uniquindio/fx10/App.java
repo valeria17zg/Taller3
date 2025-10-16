@@ -16,12 +16,12 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Dashboard.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root, 700, 550);
         
-        primaryStage.setTitle("Sistema de Gestión de Productos");
+        primaryStage.setTitle("Sistema de Gestión de Inmuebles");
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(700);
+        primaryStage.setMinHeight(560);
         primaryStage.show();
     }
 

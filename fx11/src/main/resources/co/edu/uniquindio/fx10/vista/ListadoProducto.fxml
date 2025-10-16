@@ -7,25 +7,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox spacing="20" style="-fx-background-color: #f0dfe7;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.fx10.controllers.ListadoProductoController">
+<VBox prefHeight="615.0" prefWidth="678.0" spacing="20" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.fx10.controllers.ListadoProductoController">
     
     <padding>
         <Insets bottom="30" left="30" right="30" top="30" />
     </padding>
-
-    <!-- Encabezado -->
-    <Label style="-fx-text-fill: #4d1223;" text="Editar Listado Productos" textFill="#4d1223">
-        <font>
-            <Font name="System Bold" size="28" />
-        </font>
-    </Label>
-    <Button fx:id="btnCrearProducto" onAction="#onCrearProducto" style="-fx-background-color: #866af7; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand; -fx-background-radius: 5;" text="Crear Producto">
-        <font>
-            <Font name="System Bold" size="14" />
-        </font>
-    </Button>
 
     <!-- Tabla de productos -->
     <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" VBox.vgrow="ALWAYS">
@@ -33,19 +20,19 @@
             <Insets bottom="15" left="15" right="15" top="15" />
         </padding>
 
-        <Label style="-fx-text-fill: #34495e; -fx-font-size: 16px; -fx-font-weight: bold;" text="Lista de Productos">
+        <Label style="-fx-text-fill: #34495e; -fx-font-size: 16px; -fx-font-weight: bold;" text="Listado Inmuebles">
             <VBox.margin>
                 <Insets bottom="10" />
             </VBox.margin>
         </Label>
 
-        <TableView fx:id="tablaProductos" style="-fx-background-color: #faedf4; -fx-border-color: #ffb3da; -fx-border-width: 3; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+        <TableView fx:id="tablaInmuebles" style="-fx-background-color: #faedf4; -fx-border-color: #ffb3da; -fx-border-width: 3; -fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="colCodigo" prefWidth="100" text="Código" />
-                <TableColumn fx:id="colNombre" prefWidth="200" text="Nombre" />
-                <TableColumn fx:id="colDescripcion" prefWidth="280" text="Descripción" />
-                <TableColumn fx:id="colPrecio" prefWidth="120" text="Precio" />
-                <TableColumn fx:id="colStock" prefWidth="100" text="Stock" />
+                <TableColumn fx:id="colTipo" prefWidth="96.0" text="Tipo" />
+                <TableColumn fx:id="colCiudad" prefWidth="108.0" text="Ciudad" />
+                <TableColumn fx:id="colHabitaciones" prefWidth="89.0" text="# Habitaciones" />
+            <TableColumn fx:id="colPisos" prefWidth="106.0" text="# Pisos" />
+            <TableColumn fx:id="colPrecio" prefWidth="135.0" text="Precio" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -56,8 +43,7 @@
             <VBox.margin>
                 <Insets top="15" />
             </VBox.margin>
-         <Button id="backButton" fx:id="backButton" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: #abb1ba; -fx-font-size: 13px; -fx-text-fill: white; -fx-padding: 8 16; -fx-cursor: hand; -fx-background-radius: 5;" text="Volver" />
-            <Button fx:id="btnEliminar" onAction="#onEliminarProducto" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 16; -fx-cursor: hand; -fx-background-radius: 5;" text="Eliminar Producto" />
+            <Button fx:id="btnEliminar" onAction="#onEliminarInmueble" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 16; -fx-cursor: hand; -fx-background-radius: 5;" text="Eliminar Inmueble" />
         </HBox>
     </VBox>
 </VBox>

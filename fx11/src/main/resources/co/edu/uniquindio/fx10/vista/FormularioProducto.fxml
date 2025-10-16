@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox spacing="20" style="-fx-background-color: #deced6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.fx10.controllers.FormularioProductoController">
+<VBox prefHeight="514.0" prefWidth="600.0" spacing="20" style="-fx-background-color: #e7d3ed;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.fx10.controllers.FormularioProductoController">
     
     <padding>
         <Insets bottom="30" left="30" right="30" top="30" />
     </padding>
 
     <!-- Encabezado -->
-    <Label style="-fx-text-fill: #2c3e50;" text="Crear Nuevo Producto" textFill="#461824">
+    <Label style="-fx-text-fill: #4d1223;" text="Registrar Inmueble" textFill="#461824">
         <font>
             <Font name="System Bold" size="28" />
         </font>
@@ -30,26 +30,30 @@
             <Insets bottom="30" left="30" right="30" top="30" />
         </padding>
 
-        <GridPane hgap="15" vgap="20">
+        <GridPane hgap="15" prefHeight="252.0" prefWidth="467.0" vgap="20">
             <!-- Código -->
-            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Código:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="txtCodigo" promptText="Ingrese el código del producto" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Tipo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="txtTipo" prefHeight="37.0" prefWidth="345.0" promptText="Ingrese el tipo de inmueble" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
             <!-- Nombre -->
-            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="txtNombre" promptText="Ingrese el nombre del producto" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Ciudad:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCiudad" promptText="Ingrese la ciudad del inmueble" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <!-- Descripción -->
-            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Descripción:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="txtDescripcion" promptText="Ingrese la descripción del producto" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-            <!-- Precio -->
-            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Precio:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="txtPrecio" promptText="Ingrese el precio" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <!-- Stock -->
-            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Stock:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="txtStock" promptText="Ingrese la cantidad en stock" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Habitaciones:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="txtHabitaciones" promptText="Ingrese el número de habitaciones" style="-fx-font-size: 14px; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <TextField fx:id="txtPisos" prefHeight="43.0" prefWidth="345.0" promptText="Ingrese el número de pisos" style="-fx-padding: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="txtPrecio" prefHeight="39.0" prefWidth="345.0" promptText="Ingrese el precio del inmueble" style="-fx-padding: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Pisos:" GridPane.rowIndex="3" />
+         <Label style="-fx-text-fill: #34495e; -fx-font-size: 14px; -fx-font-weight: bold;" text="Precio:" GridPane.rowIndex="4" />
 
             <columnConstraints>
                 <ColumnConstraints minWidth="120" prefWidth="120" />
@@ -61,6 +65,9 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
+            <RowConstraints />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
          </rowConstraints>
         </GridPane>
 
@@ -70,7 +77,7 @@
                 <Insets top="20" />
             </VBox.margin>
             <Button fx:id="btnCancelar" onAction="#onCancelar" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 25; -fx-cursor: hand; -fx-background-radius: 5;" text="Cancelar" />
-            <Button fx:id="btnGuardar" onAction="#onGuardarProducto" style="-fx-background-color: #866af7; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 25; -fx-cursor: hand; -fx-background-radius: 5;" text="Guardar Producto">
+            <Button fx:id="btnGuardar" onAction="#onGuardarMoto" style="-fx-background-color: #866af7; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 25; -fx-cursor: hand; -fx-background-radius: 5;" text="Registrar Inmueble">
                 <font>
                     <Font name="System Bold" size="14" />
                 </font>

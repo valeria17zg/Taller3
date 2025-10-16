@@ -1,26 +1,18 @@
 package co.edu.uniquindio.fx10.controllers;
 
-import co.edu.uniquindio.fx10.App;
-import co.edu.uniquindio.fx10.models.Producto;
-import co.edu.uniquindio.fx10.repositories.ProductoRepository;
+import co.edu.uniquindio.fx10.models.Inmueble;
+import co.edu.uniquindio.fx10.repositories.InmuebleRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * Controlador para el Dashboard principal
  */
 public class ListadoProductoController {
-    @FXML
-    private Button backButton;
 
     @FXML
     private VBox contenedorPrincipal;
@@ -29,137 +21,82 @@ public class ListadoProductoController {
     private Label lblTitulo;
 
     @FXML
-    private TableView<Producto> tablaProductos;
+    private TableView<Inmueble> tablaInmuebles;
 
     @FXML
-    private TableColumn<Producto, String> colCodigo;
+    private TableColumn<Inmueble, String> colTipo;
 
     @FXML
-    private TableColumn<Producto, String> colNombre;
+    private TableColumn<Inmueble, String> colCiudad;
 
     @FXML
-    private TableColumn<Producto, String> colDescripcion;
-
+    private TableColumn<Inmueble, String> colHabitaciones;
     @FXML
-    private TableColumn<Producto, Double> colPrecio;
-
+    private TableColumn<Inmueble, String> colPisos;
     @FXML
-    private TableColumn<Producto, Integer> colStock;
+    private TableColumn<Inmueble, Double> colPrecio;
 
-    @FXML
-    private Button btnCrearProducto;
+
 
     @FXML
     private Button btnEliminar;
 
-    private ProductoRepository productoRepository;
-    private ObservableList<Producto> listaProductos;
+    private InmuebleRepository inmuebleRepository;
+    private ObservableList<Inmueble> listaInmuebles;
     private DashboardController dashboardController;
+
 
     @FXML
     public void initialize() {
-        productoRepository = ProductoRepository.getInstancia();
+        inmuebleRepository = InmuebleRepository.getInstancia();
         
         // Configurar las columnas de la tabla
-        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colCiudad.setCellValueFactory(new PropertyValueFactory<>("ciudad"));
+        colHabitaciones.setCellValueFactory(new PropertyValueFactory<>("habitaciones"));
+        colPisos.setCellValueFactory(new PropertyValueFactory<>("pisos"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
-        // Formatear la columna de precio
-        colPrecio.setCellFactory(column -> new TableCell<Producto, Double>() {
-            @Override
-            protected void updateItem(Double precio, boolean empty) {
-                super.updateItem(precio, empty);
-                if (empty || precio == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("$%.2f", precio));
-                }
-            }
-        });
 
         // Cargar los productos
         cargarProductos();
     }
 
-    public void setDashboardController(DashboardController dashboardController) {
-        this.dashboardController = dashboardController;
-        this.contenedorPrincipal = dashboardController.getContenedorPrincipal();
-    }
-    /**
-     * Carga los productos en la tabla
-     */
+
     public void cargarProductos() {
-        listaProductos = FXCollections.observableArrayList(productoRepository.getProductos());
-        tablaProductos.setItems(listaProductos);
+        listaInmuebles = FXCollections.observableArrayList(inmuebleRepository.getInmuebles());
+        tablaInmuebles.setItems(listaInmuebles);
     }
 
-    /**
-     * Maneja el evento de click en el botón "Crear Producto"
-     */
-    @FXML
-    private void onCrearProducto() {
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/FormularioProducto.fxml"));
-            Parent formulario = loader.load();
-            
-            // Obtener el controlador del formulario
-            FormularioProductoController controller = loader.getController();
-            controller.setDashboardController(dashboardController);
-            
-            // Reemplazar el contenido del contenedor principal
-            contenedorPrincipal.getChildren().clear();
-            contenedorPrincipal.getChildren().add(formulario);
-            
-        } catch (IOException e) {
-            mostrarAlerta("Error", "No se pudo cargar el formulario", Alert.AlertType.ERROR);
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * Maneja el evento de click en el botón "Eliminar"
-     */
+
+
+
     @FXML
-    private void onEliminarProducto() {
-        Producto productoSeleccionado = tablaProductos.getSelectionModel().getSelectedItem();
+    private void onEliminarInmueble() {
+        Inmueble inmuebleSeleccionado = tablaInmuebles.getSelectionModel().getSelectedItem();
         
-        if (productoSeleccionado == null) {
-            mostrarAlerta("Advertencia", "Por favor seleccione un producto para eliminar", Alert.AlertType.WARNING);
+        if (inmuebleSeleccionado == null) {
+            mostrarAlerta("Advertencia", "Por favor seleccione un inmueble para eliminar", Alert.AlertType.WARNING);
             return;
         }
 
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar eliminación");
-        confirmacion.setHeaderText("¿Está seguro de eliminar el producto?");
-        confirmacion.setContentText("Producto: " + productoSeleccionado.getNombre());
+        confirmacion.setHeaderText("¿Está seguro de eliminar el inmueble?");
+        confirmacion.setContentText("Tipo: " + inmuebleSeleccionado.getTipo() + " - Ciudad: " + inmuebleSeleccionado.getCiudad());
 
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                productoRepository.eliminarProducto(productoSeleccionado);
+                inmuebleRepository.eliminarInmueble(inmuebleSeleccionado);
                 cargarProductos();
-                mostrarAlerta("Éxito", "Producto eliminado correctamente", Alert.AlertType.INFORMATION);
+                mostrarAlerta("Éxito", "Inmueble eliminado correctamente", Alert.AlertType.INFORMATION);
             }
         });
     }
 
-    /**
-     * Restaura la vista del dashboard
-     */
-    public void restaurarVista() {
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Dashboard.fxml"));
-            Parent dashboard = loader.load();
-            
-            contenedorPrincipal.getChildren().clear();
-            contenedorPrincipal.getChildren().add(dashboard);
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
+
 
     /**
      * Muestra una alerta al usuario
@@ -176,20 +113,6 @@ public class ListadoProductoController {
         return contenedorPrincipal;
     }
 
-    @FXML
-    void onBackButton(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Dashboard.fxml"));
-            Parent dashboard = loader.load();
 
-            // Reemplazar el contenido del contenedor principal
-            contenedorPrincipal.getChildren().clear();
-            contenedorPrincipal.getChildren().add(dashboard);
-
-        } catch (IOException e) {
-            mostrarAlerta("Error", "No se pudo cargar el Dashboard", Alert.AlertType.ERROR);
-            e.printStackTrace();
-        }
-    }
 }
 

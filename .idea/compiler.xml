@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="fx10" />
-        <module name="fx10 (1)" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fx10 (1)" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
